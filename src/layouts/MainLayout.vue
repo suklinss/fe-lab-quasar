@@ -10,19 +10,22 @@
           </q-avatar>
           Title
         </q-toolbar-title>
-
-        <q-tabs align="left">
-          <q-route-tab to="/page1" label="Page One" />
-          <q-route-tab to="/page2" label="Page Two" />
-          <q-route-tab to="/page3" label="Page Three" />
-        </q-tabs>
-
+        {{userStores.info.username || ''}}
         <q-btn
           push
           color="primary"
           round
           icon="login"
-          @click="loginBtn = true"
+          @click="userStores.callopject.loginDialog = true"
+          v-if="!userStores.info.username"
+        />
+        <q-btn
+          push
+          color="primary"
+          round
+          icon="user"
+          @click="userStores.info = {}"
+          v-if="userStores.info.username"
         />
         <!-- <q-btn dense flat round icon="menu" @click="toggleRightDrawer" /> -->
       </q-toolbar>
@@ -63,18 +66,25 @@
       </q-toolbar>
     </q-footer>
     <div class="q-pa-md q-gutter-sm">
-  <login-dialog v-model="loginBtn" />
+      <q-dialog v-model="userStores.callopject.loginDialog">
+        <login-dialog />
+      </q-dialog>
     </div>
   </q-layout>
 </template>
 
 <script>
-import { ref } from "vue";
-import loginDialog from '../components/loginDialog.vue';
+import { computed, ref } from "vue";
+import { userStore } from "../stores/userStore";
+import { storeToRefs } from "pinia";
+
+import loginDialog from "../components/loginDialog.vue";
 
 export default {
   components: { loginDialog },
   setup() {
+    const userStores = userStore();
+
     const leftDrawerOpen = ref(false);
     const rightDrawerOpen = ref(false);
 
@@ -88,7 +98,7 @@ export default {
       toggleRightDrawer() {
         rightDrawerOpen.value = !rightDrawerOpen.value;
       },
-      loginBtn: ref(false),
+      userStores,
     };
   },
 };
