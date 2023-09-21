@@ -8,7 +8,8 @@ export const userStore = defineStore('userStore', {
       level: 0,
     },
     callopject: {
-      loginDialog: false
+      loginDialog: false,
+      signupDialog: false
     }
   }),
 

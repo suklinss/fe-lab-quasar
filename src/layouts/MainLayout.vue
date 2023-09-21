@@ -11,22 +11,62 @@
           Title
         </q-toolbar-title>
         {{userStores.info.username || ''}}
+
         <q-btn
           push
-          color="primary"
-          round
-          icon="login"
+          color="amber"
+          label="Log in"
           @click="userStores.callopject.loginDialog = true"
           v-if="!userStores.info.username"
         />
+
         <q-btn
           push
-          color="primary"
-          round
-          icon="user"
-          @click="userStores.info = {}"
-          v-if="userStores.info.username"
+          color="purple"
+          label="Sign up"
+          @click="userStores.callopject.signupDialog = true"
+          v-if="!userStores.info.username"
         />
+
+        <!-- <q-btn
+          push
+          color="primary"
+          label="Log ins"
+          @click="userStores.info = {}"
+          v-if="!userStores.info.username"
+        />       -->
+
+
+        <q-btn color="primary" label="Basic Menu" v-if="userStores.info.username">
+        <q-menu>
+          <q-list style="min-width: 100px">
+            <q-item clickable v-close-popup>
+              <q-item-section>New tab</q-item-section>
+            </q-item>
+            <q-item clickable v-close-popup>
+              <q-item-section>New incognito tab</q-item-section>
+            </q-item>
+            <q-separator />
+            <q-item clickable v-close-popup>
+              <q-item-section>Recent tabs</q-item-section>
+            </q-item>
+            <q-item clickable v-close-popup>
+              <q-item-section>History</q-item-section>
+            </q-item>
+            <q-item clickable v-close-popup>
+              <q-item-section>Downloads</q-item-section>
+            </q-item>
+            <q-separator />
+            <q-item clickable v-close-popup>
+              <q-item-section>Settings</q-item-section>
+            </q-item>
+            <q-separator />
+            <q-item clickable v-close-popup>
+              <q-item-section @click="userStores.info = {}">Sign out</q-item-section>
+            </q-item>
+          </q-list>
+        </q-menu>
+      </q-btn>
         <!-- <q-btn dense flat round icon="menu" @click="toggleRightDrawer" /> -->
       </q-toolbar>
     </q-header>
@@ -69,6 +109,9 @@
       <q-dialog v-model="userStores.callopject.loginDialog">
         <login-dialog />
       </q-dialog>
+      <q-dialog v-model="userStores.callopject.signupDialog">
+        <signupDialog/>
+      </q-dialog>
     </div>
   </q-layout>
 </template>
@@ -76,12 +119,12 @@
 <script>
 import { computed, ref } from "vue";
 import { userStore } from "../stores/userStore";
-import { storeToRefs } from "pinia";
 
 import loginDialog from "../components/loginDialog.vue";
+import signupDialog from "../components/signupDialog.vue";
 
 export default {
-  components: { loginDialog },
+  components: { loginDialog,signupDialog },
   setup() {
     const userStores = userStore();
 

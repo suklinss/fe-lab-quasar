@@ -1,36 +1,38 @@
 <template>
-  <q-card style="width: 300px">
+  <q-card style="width: 700px; max-width: 80vw;">
     <q-toolbar>
       <q-avatar>
         <img src="https://cdn.quasar.dev/logo-v2/svg/logo.svg" />
       </q-avatar>
 
       <q-toolbar-title
-        ><span class="text-weight-bold">Log-in Dialog</span></q-toolbar-title
+        ><span class="text-weight-bold">Sign-up Dialog</span></q-toolbar-title
       >
 
       <q-btn flat round dense icon="close" v-close-popup />
     </q-toolbar>
 
     <q-card-section>
-      <div class="text-h6">Username</div>
+      <div class="row">
+      <div class="col">
+        <div class="text-h6">Username</div>
       <q-input
         dense
         v-model="usernameInput"
         autofocus
         @keyup.enter="prompt = false"
       />
-
-      <div class="text-h6">Password</div>
+      </div>
+      <div class="col">
+        <div class="text-h6">Username</div>
       <q-input
         dense
-        v-model="passwordInput"
+        v-model="usernameInput"
         autofocus
-        filled
-        type="password"
-        hint="Password"
         @keyup.enter="prompt = false"
       />
+      </div>
+    </div>
     </q-card-section>
     <q-card-actions align="right" class="text-primary">
       <q-btn flat label="Cancel" v-close-popup />
@@ -44,7 +46,7 @@ import { ref } from "vue";
 import { userStore } from "../stores/userStore";
 
 export default {
-  name: "loginDialog",
+  name: "signupDialog",
 
   setup() {
     const userStores = userStore();
@@ -59,7 +61,7 @@ export default {
         if (response[0].username) {
           if (passwordInput.value == response[0].password) {
             userStores.info.username = response[0].username;
-            userStores.callopject.loginDialog = false
+            userStores.callopject.signupDialog = false
           }
           else{
             console.log("wrong password");
