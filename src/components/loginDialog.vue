@@ -28,7 +28,6 @@
         autofocus
         filled
         type="password"
-        hint="Password"
         @keyup.enter="prompt = false"
       />
     </q-card-section>
@@ -53,15 +52,19 @@ export default {
     const fetchData = async () => {
       try {
         const response = await userStores.api_getuser({
-          username: usernameInput.value,
+          username: usernameInput.value
         });
-        console.log(response);
+        const hashPassword = await userStores.api_hashuser({
+          data:passwordInput.value,
+          salt:response[0].salt
+        })
+        console.log(hashPassword)
+        console.log(response[0].password)
         if (response[0].username) {
-          if (passwordInput.value == response[0].password) {
+          if (hashPassword.hashData == response[0].password) {
             userStores.info.username = response[0].username;
-            userStores.callopject.loginDialog = false
-          }
-          else{
+            userStores.callopject.loginDialog = false;
+          } else {
             console.log("wrong password");
           }
         } else {
@@ -77,10 +80,8 @@ export default {
       userStores,
       usernameInput,
       passwordInput,
-      fetchData,
+      fetchData
     };
-  },
+  }
 };
 </script>
-
-

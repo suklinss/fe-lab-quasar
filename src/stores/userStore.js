@@ -32,6 +32,34 @@ export const userStore = defineStore('userStore', {
             reject(error);
           });
       });
+    },
+
+    api_adduser(requestData) {
+      return new Promise((resolve, reject) => {
+        axios
+          .post("http://localhost:8000/user/add", requestData)
+          .then(response => {
+            resolve(response.data);
+          })
+          .catch(error => {
+            console.error(error);
+            reject(error);
+          });
+      });
+    },
+
+    api_hashuser(requestData) {
+      return new Promise((resolve, reject) => {
+        axios
+          .post("http://localhost:8000/user/hash", requestData)
+          .then(response => {
+            resolve(response.data);
+          })
+          .catch(error => {
+            console.error(error);
+            reject(error);
+          });
+      });
     }
   }
 })

@@ -10,9 +10,9 @@
           </q-avatar>
           Title
         </q-toolbar-title>
-        {{userStores.info.username || ''}}
 
         <q-btn
+          class="q-mr-xs"
           push
           color="amber"
           label="Log in"
@@ -37,7 +37,7 @@
         />       -->
 
 
-        <q-btn color="primary" label="Basic Menu" v-if="userStores.info.username">
+        <q-btn color="cyan-13" :label="userStores.info.username || ''" v-if="userStores.info.username">
         <q-menu>
           <q-list style="min-width: 100px">
             <q-item clickable v-close-popup>
