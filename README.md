@@ -1,6 +1,11 @@
-# fe (fe)
+#This Project for Test Quasar framwork login and get user form rest api (VueJS)
+lib using
+1.axios
+2.pinia
+3.quasar
+4.vue
 
-fe
+cover by https://github.com/suklinss/lab-login-be-nodejs
 
 ## Install the dependencies
 ```bash
