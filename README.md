@@ -5,7 +5,7 @@ lib using
 3.quasar
 4.vue
 
-cover by https://github.com/suklinss/lab-login-be-nodejs
+rest api with https://github.com/suklinss/lab-login-be-nodejs
 
 ## Install the dependencies
 ```bash
